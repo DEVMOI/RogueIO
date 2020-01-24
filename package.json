@@ -1,0 +1,43 @@
+{
+	"name": "RogueJs",
+	"version": "0.0.1",
+	"description": "A Light Rogue Javascript Game Engine",
+	"main": "index.js",
+	"scripts": {
+		"watch": "webpack --watch",
+		"dev": "webpack-dev-server --open --watch",
+		"build": "webpack && babel .moi -d .moi/lib",
+		"start": "yarn build && node .moi/lib/server.js",
+		"build:docker": "docker-compose build",
+		"dev:docker": "docker-compose up dev",
+		"start:docker": "docker-compose up web nginx -d",
+		"end:docker": "docker-compose down",
+		"clean:docker": "docker system prune -f"
+	},
+	"repository": "https://github.com/NodeGG/RogueJs.git",
+	"author": "Warren Gates <warrenckhan@gmail.com>",
+	"license": "MIT",
+	"private": false,
+	"dependencies": {
+		"@babel/polyfill": "^7.4.4",
+		"core-js": "3",
+		"dotenv": "^8.0.0",
+		"lodash": "^4.17.13"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.4.4",
+		"@babel/core": "^7.2.2",
+		"@babel/preset-env": "^7.4.5",
+		"@babel/register": "^7.4.4",
+		"babel-loader": "^8.0.6",
+		"css-loader": "^3.0.0",
+		"html-webpack-plugin": "^3.2.0",
+		"prettier": "^1.19.1",
+		"script-ext-html-webpack-plugin": "^2.1.3",
+		"style-loader": "^0.23.1",
+		"webpack": "^4.34.0",
+		"webpack-cli": "^3.3.4",
+		"webpack-dev-server": "^3.7.2",
+		"yarn": ">=1.16.0"
+	}
+}

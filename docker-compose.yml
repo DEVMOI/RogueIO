@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  dev:
+    build: .
+    command: yarn dev
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 8081:8081
