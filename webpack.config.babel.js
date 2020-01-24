@@ -2,9 +2,9 @@ import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ScriptExtHtmlWebpackPlugin from "script-ext-html-webpack-plugin";
 export default {
-  entry: path.join(__dirname, "src/index.js"),
+  entry: path.join(__dirname, "App.js"),
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "lib"),
     filename: "[name].bundle.js"
   },
   module: {
@@ -40,7 +40,7 @@ export default {
   devtool: "source-map",
   mode: "development",
   devServer: {
-    contentBase: "./dist",
+    contentBase: "./lib",
     inline: true,
     port: 8085 //my prefered port for development, but change as you see fit
   }
