@@ -13,12 +13,22 @@ let game = {
   ctx: null,
 
   init() {
+    let x = this.x;
+    let y = this.y;
     this.canvas = new Canvas({
       tilesize: this.tilesize,
       numTiles: this.numTiles,
       uiWidth: this.uiWidth
     });
+    window.addEventListener("keydown", this);
     document.body.append(this.canvas.Display());
+  },
+  handleEvent(e) {
+    if (e.key == "w") this.y--;
+    if (e.key == "s") this.y++;
+    if (e.key == "a") this.x--;
+    if (e.key == "d") this.x++;
+    console.log("w", this.y);
   },
   draw() {
     this.ctx = this.canvas.getCtx();
@@ -26,10 +36,11 @@ let game = {
     this.drawSprite(0, this.x, this.y);
   },
   drawSprite(sprites, x, y) {
+    console.log(this.y);
     this.spriteSheet = new Image();
     this.spriteSheet.src = "moiboi.png";
     this.ctx = this.canvas.getCtx();
-    
+
     this.ctx.drawImage(
       this.spriteSheet,
       sprites * 16,
@@ -47,4 +58,3 @@ game.init();
 setInterval(() => {
   game.draw();
 }, 15);
-game.drawSprite();
