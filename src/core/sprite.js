@@ -1,10 +1,27 @@
+import Canvas from "./canvas";
 export default class Sprite {
-  constructor({ ctx }) {
+  constructor(ctx, tilesize) {
+    this.tilesize = tilesize;
+    this.spriteSheet = null;
     this.ctx = ctx;
   }
+  drawSprite(sprites, x, y) {
+    // console.log(this.ctx);
+    if (this.ctx !== undefined) {
+      this.spriteSheet = new Image();
+      this.spriteSheet.src = "moiboi.png";
 
-  drawRect(x = 1, y = 1, fillColor = "red", height = 25, width = 25) {
-    this.ctx.fillStyle = fillColor;
-    this.ctx.fillRect(x, y, height, width);
+      this.ctx.drawImage(
+        this.spriteSheet,
+        sprites * 16,
+        0,
+        16,
+        16,
+        x * this.tilesize,
+        y * this.tilesize,
+        this.tilesize,
+        this.tilesize
+      );
+    }
   }
 }

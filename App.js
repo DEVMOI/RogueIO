@@ -1,6 +1,7 @@
 // import init from "./lib";
 import init from "./src";
-const { Canvas, Sprite } = init();
+import Tile from './src/core/tile';
+const { Canvas, Sprite, Map } = init();
 
 let game = {
   x: 0,
@@ -11,50 +12,47 @@ let game = {
   uiWidth: 4,
   canvas: null,
   ctx: null,
+  map: null,
+  sprite: null,
 
   init() {
-    let x = this.x;
-    let y = this.y;
     this.canvas = new Canvas({
       tilesize: this.tilesize,
       numTiles: this.numTiles,
       uiWidth: this.uiWidth
     });
+
     window.addEventListener("keydown", this);
     document.body.append(this.canvas.Display());
+
+    this.ctx = this.canvas.getCtx();
+    this.tile = new Tile
+    this.map = new Map(this.x, this.y, this.numTiles);
+
+    this.map.generateLevel();
   },
   handleEvent(e) {
     if (e.key == "w") this.y--;
     if (e.key == "s") this.y++;
     if (e.key == "a") this.x--;
     if (e.key == "d") this.x++;
-    console.log("w", this.y);
   },
   draw() {
     this.ctx = this.canvas.getCtx();
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawSprite(0, this.x, this.y);
-  },
-  drawSprite(sprites, x, y) {
-    console.log(this.y);
-    this.spriteSheet = new Image();
-    this.spriteSheet.src = "moiboi.png";
-    this.ctx = this.canvas.getCtx();
+    this.sprite = new Sprite(this.ctx, this.tilesize);
 
-    this.ctx.drawImage(
-      this.spriteSheet,
-      sprites * 16,
-      0,
-      16,
-      16,
-      this.x * this.tilesize,
-      this.y * this.tilesize,
-      this.tilesize,
-      this.tilesize
-    );
+    for (let i = 0; i < this.numTiles; i++) {
+      for (let j = 0; j < this.numTiles; j++) {
+        this.map.getTile(i, j).draw();
+      }
+    }
+    // Draws Character
+    this.sprite.drawSprite(0, this.x, this.y);
   }
 };
 game.init();
 setInterval(() => {
   game.draw();
 }, 15);
+export { game };
