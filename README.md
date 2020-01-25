@@ -2,6 +2,9 @@
 
 > A Light Rogue JavaScript Game Engine
 
+### Communication Platforms
+> [Discord](https://discord.gg/atuZfDJ)
+
 ### Intended Features
 
 - Basic Game Engine
