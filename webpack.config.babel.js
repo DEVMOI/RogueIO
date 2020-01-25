@@ -28,7 +28,7 @@ export default {
     new HtmlWebpackPlugin({
       title: "pack",
       template: path.join(__dirname, "public/index.html"),
-      nject: "body"
+      inject: "body"
     }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: "defer"
@@ -40,7 +40,7 @@ export default {
   devtool: "source-map",
   mode: "development",
   devServer: {
-    contentBase: "./lib",
+    contentBase: "./public",
     inline: true,
     port: 8085 //my prefered port for development, but change as you see fit
   }

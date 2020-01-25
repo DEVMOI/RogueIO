@@ -1,24 +1,27 @@
 export default class Canvas {
-  constructor({ x, y, tilesize, backgroundColor, context }) {
-    this._x = x || 80;
-    this._y = y || 25;
-    this._tilesize = tilesize || 16;
-    this.backgroundColor = backgroundColor || "#000";
+  constructor({ tilesize, numTiles, uiWidth, context }) {
+    this.height = null;
+    this.width = null;
+    this._tilesize = tilesize || 64;
+    this.numTiles = numTiles || 9;
+    this.uiWidth = uiWidth || 4;
     this.context = context || "2d";
     this.canvas = null;
     this.ctx = null;
   }
-  _drawCanvas() {
+  _setupCanvas() {
     const canvas = document.createElement("canvas");
-    canvas.width = this._x * this._tilesize;
-    canvas.height = this._y * this._tilesize;
-    canvas.style.backgroundColor = this.backgroundColor;
+    canvas.width = this.width = this._tilesize * (this.numTiles + this.uiWidth);
+    canvas.height = this.height = this._tilesize * this.numTiles;
+    canvas.style.height = canvas.height + "px";
+    canvas.style.width = canvas.width + "px";
     this.ctx = canvas.getContext(this.context);
     this.ctx.fill = this.color;
+    this.ctx.imageSmoothingEnabled = false;
     this.canvas = canvas;
   }
-  getCanvas() {
-    this._drawCanvas();
+  Display() {
+    this._setupCanvas();
     return this.canvas;
   }
   getCtx() {
