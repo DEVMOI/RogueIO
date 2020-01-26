@@ -1,6 +1,6 @@
 // import init from "./lib";
 import RogueJs from "./src";
-let { Game,Entity } = RogueJs();
+let { Game,Entity,Floor } = RogueJs();
 
 
 
@@ -67,5 +67,4 @@ class MerQueen extends Entity {
 }
 let arr = [Blob, Raptor, Golem, Ent, MerQueen];
 Game.registerMonsters(arr);
-Game.gameTitle = 'RogueJS'
 Game.init();

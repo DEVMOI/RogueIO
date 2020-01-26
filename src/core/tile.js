@@ -3,7 +3,7 @@ import SpriteSheet from "./spritesheet";
 import util from "./util";
 export default class Tile {
   constructor(x, y, spritesheet, passable) {
-    this.tiles = null;
+
     this.ctx = null;
     this.x = x;
     this.y = y;
@@ -11,8 +11,8 @@ export default class Tile {
     this.passable = passable;
   }
   replace(newTileType) {
-    this.tiles[this.x][this.y] = new newTileType(this.x, this.y);
-    return this.tiles[this.x][this.y];
+    Game.map.tiles[this.x][this.y] = new newTileType(this.x, this.y);
+    return Game.map.tiles[this.x][this.y];
   }
   //manhattan distance
   dist(other) {

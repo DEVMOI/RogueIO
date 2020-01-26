@@ -1,12 +1,12 @@
 import Game from "./game";
 import Wall from "./wall";
 import Floor from "./floor";
+import Exit from './exit';
 import util from "./util";
 
+
 export default class Map {
-  constructor(x, y, numTiles) {
-    this.x = x;
-    this.y = y;
+  constructor( numTiles) {
     this.numTiles = numTiles;
     this.tiles = [];
     this.monsters = null;
