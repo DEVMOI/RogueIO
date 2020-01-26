@@ -56,7 +56,7 @@ class Ent extends Entity {
 
 class MerQueen extends Entity {
   constructor(tile) {
-    super(tile, 8, 2);
+    super(tile, 8, 5);
   }
   doStuff() {
     let neighbors = this.tile.getAdjacentPassableNeighbors();
@@ -67,4 +67,5 @@ class MerQueen extends Entity {
 }
 let arr = [Blob, Raptor, Golem, Ent, MerQueen];
 Game.registerMonsters(arr);
+Game.gameTitle = 'RogueJS'
 Game.init();

@@ -1,26 +1,30 @@
 import Game from "./game";
-import Sprite from "./sprite";
+import SpriteSheet from "./spritesheet";
 export default class Entity {
   constructor(tile, sprite, hp) {
-    this.sprite = null;
+    this.spritesheet = null;
     this.ctx = null;
     this.move(tile);
-    this.spritesheet = sprite;
+    this.sprite = sprite;
     this.hp = hp;
+    this.teleportCounter = 2;
   }
   heal(damage) {
     this.hp = Math.min(Game.maxHp, this.hp + damage);
   }
   draw() {
     this.ctx = Game.canvas.getCtx();
-    this.sprite = new Sprite(this.ctx, Game.tilesize);
-
-    this.sprite.drawSprite(this.spritesheet, this.tile.x, this.tile.y);
-    this.drawHp();
+    this.spritesheet = new SpriteSheet(this.ctx, Game.tilesize);
+    if (this.teleportCounter > 0) {
+      this.spritesheet.drawSprite(10, this.tile.x, this.tile.y);
+    } else {
+      this.spritesheet.drawSprite(this.sprite, this.tile.x, this.tile.y);
+      this.drawHp();
+    }
   }
   drawHp() {
     for (let i = 0; i < this.hp; i++) {
-      this.sprite.drawSprite(
+      this.spritesheet.drawSprite(
         9,
         this.tile.x + (i % 3) * (5 / 16),
         this.tile.y - Math.floor(i / 3) * (5 / 16)
@@ -29,7 +33,6 @@ export default class Entity {
   }
   tryMove(dx, dy) {
     let newTile = this.tile.getNeighbor(dx, dy);
-    console.log(newTile);
     if (newTile.passable) {
       if (!newTile.monster) {
         this.move(newTile);
@@ -44,7 +47,8 @@ export default class Entity {
     }
   }
   update() {
-    if (this.stunned) {
+    this.teleportCounter--;
+    if (this.stunned || this.teleportCounter > 0) {
       this.stunned = false;
       return;
     }
@@ -74,7 +78,7 @@ export default class Entity {
   die() {
     this.dead = true;
     this.tile.monster = null;
-    this.spritesheet = 1;
+    this.sprite = 1;
   }
 
   move(tile) {
@@ -83,5 +87,6 @@ export default class Entity {
     }
     this.tile = tile;
     tile.monster = this;
+    tile.stepOn(this);     
   }
 }

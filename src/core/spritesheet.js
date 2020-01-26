@@ -1,16 +1,14 @@
 import Canvas from "./canvas";
-export default class Sprite {
-  constructor(ctx, tilesize) {
+export default class SpriteSheet {
+  constructor({ ctx, tilesize, gameTitle, spriteSheet }) {
     this.tilesize = tilesize;
-    this.spriteSheet = null;
+    this.spriteSheet = spriteSheet;
     this.ctx = ctx;
+    this.gameTitle = gameTitle;
   }
   drawSprite(sprites, x, y) {
     // console.log(this.ctx);
     if (this.ctx !== undefined) {
-      this.spriteSheet = new Image();
-      this.spriteSheet.src = "moiboi.png";
-
       this.ctx.drawImage(
         this.spriteSheet,
         sprites * 16,

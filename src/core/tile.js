@@ -1,5 +1,5 @@
 import Game from "./game";
-import Sprite from "./sprite";
+import SpriteSheet from "./spritesheet";
 import util from "./util";
 export default class Tile {
   constructor(x, y, spritesheet, passable) {
@@ -51,7 +51,7 @@ export default class Tile {
   }
   draw() {
     this.ctx = Game.canvas.getCtx();
-    let sprite = new Sprite(this.ctx, Game.tilesize);
+    let sprite = new SpriteSheet(this.ctx, Game.tilesize);
     sprite.drawSprite(this.spritesheet, this.x, this.y);
   }
 }
