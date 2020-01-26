@@ -1,50 +1,70 @@
 // import init from "./lib";
-import init from "./src";
-const { Canvas, Sprite } = init();
+import RogueJs from "./src";
+let { Game,Entity } = RogueJs();
 
-let game = {
-  x: 0,
-  y: 0,
-  spriteSheet: null,
-  tilesize: 64,
-  numTiles: 9,
-  uiWidth: 4,
-  canvas: null,
-  ctx: null,
 
-  init() {
-    this.canvas = new Canvas({
-      tilesize: this.tilesize,
-      numTiles: this.numTiles,
-      uiWidth: this.uiWidth
-    });
-    document.body.append(this.canvas.Display());
-  },
-  draw() {
-    this.ctx = this.canvas.getCtx();
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawSprite(0, this.x, this.y);
-  },
-  drawSprite(sprites, x, y) {
-    this.spriteSheet = new Image();
-    this.spriteSheet.src = "moiboi.png";
-    this.ctx = this.canvas.getCtx();
-    
-    this.ctx.drawImage(
-      this.spriteSheet,
-      sprites * 16,
-      0,
-      16,
-      16,
-      this.x * this.tilesize,
-      this.y * this.tilesize,
-      this.tilesize,
-      this.tilesize
-    );
+
+class Blob extends Entity {
+  constructor(tile) {
+    super(tile, 4, 3);
   }
-};
-game.init();
-setInterval(() => {
-  game.draw();
-}, 15);
-game.drawSprite();
+}
+
+class Raptor extends Entity {
+  constructor(tile) {
+    super(tile, 5, 1);
+  }
+  doStuff() {
+    this.attackedThisTurn = false;
+    super.doStuff();
+
+    if (!this.attackedThisTurn) {
+      super.doStuff();
+    }
+  }
+}
+
+class Golem extends Entity {
+  constructor(tile) {
+    super(tile, 6, 2);
+  }
+  update() {
+    let startedStunned = this.stunned;
+    super.update();
+    if (!startedStunned) {
+      this.stunned = true;
+    }
+  }
+}
+
+class Ent extends Entity {
+  constructor(tile) {
+    super(tile, 7, 1);
+  }
+  doStuff() {
+    let neighbors = this.tile
+      .getAdjacentNeighbors()
+      .filter(t => !t.passable && Game.map.inBounds(t.x, t.y));
+    if (neighbors.length) {
+      neighbors[0].replace(Floor);
+      this.heal(0.5);
+    } else {
+      super.doStuff();
+    }
+  }
+}
+
+class MerQueen extends Entity {
+  constructor(tile) {
+    super(tile, 8, 2);
+  }
+  doStuff() {
+    let neighbors = this.tile.getAdjacentPassableNeighbors();
+    if (neighbors.length) {
+      this.tryMove(neighbors[0].x - this.tile.x, neighbors[0].y - this.tile.y);
+    }
+  }
+}
+let arr = [Blob, Raptor, Golem, Ent, MerQueen];
+Game.registerMonsters(arr);
+Game.init();
