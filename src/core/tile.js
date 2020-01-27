@@ -3,7 +3,6 @@ import SpriteSheet from "./spritesheet";
 import util from "./util";
 export default class Tile {
   constructor(x, y, spritesheet, passable) {
-
     this.ctx = null;
     this.x = x;
     this.y = y;
@@ -51,7 +50,7 @@ export default class Tile {
   }
   draw() {
     this.ctx = Game.canvas.getCtx();
-    let sprite = new SpriteSheet(this.ctx, Game.tilesize);
+    let sprite = new SpriteSheet({ ctx: this.ctx, tilesize: Game.tilesize });
     sprite.drawSprite(this.spritesheet, this.x, this.y);
   }
 }

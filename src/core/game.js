@@ -1,8 +1,8 @@
 import Canvas from "./canvas";
 import Map from "./map";
 import Tile from "./tile";
-import Player from "./player";
 import SpriteSheet from "./spritesheet";
+import Player from "./player";
 import Exit from "./exit";
 
 let Game = {
@@ -20,8 +20,8 @@ let Game = {
   spawnRate: null,
   spawnCounter: null,
 
-  spriteSheet:null,
-  tileSet: 'moiboi.png',
+  spriteSheet: null,
+  tileSet: "moiboi.png",
 
   tilesize: 64,
   numTiles: 9,
@@ -33,6 +33,7 @@ let Game = {
   sprite: null,
   startingTile: null,
   player: null,
+  playerClass: null,
   monsterClasses: [],
 
   init() {
@@ -44,32 +45,24 @@ let Game = {
     document.body.append(this.canvas.Display());
     this.ctx = this.canvas.getCtx();
 
-     this.spriteSheet = new Image();
-     this.spriteSheet.src = this.tileSet;
-     this.spriteSheet.onload = this.showTitle();
-   
     this.sprite = new SpriteSheet({
       ctx: this.ctx,
       tilesize: this.tilesize,
-      spriteSheet:this.spriteSheet
+      tileSet: this.tileSet
     });
-
+    this.sprite.spriteSheet = new Image();
+    this.sprite.spriteSheet.src = this.tileSet;
+    this.sprite.spriteSheet.onload = this.showTitle();
     this.map = new Map(this.numTiles);
 
     window.addEventListener("keydown", this);
-
-    
   },
   handleEvent(e) {
-    if(this.gameState == "loading") this.showTitle()
-    if (e.key || this.gameState == "title") {
-      console.log("title");
+    if (this.gameState == "title") {
       this.startGame();
     } else if (this.gameState == "dead") {
-      console.log("deag");
       this.showTitle();
     } else if (this.gameState == "running") {
-      console.log(e);
       if (e.key == "w") this.player.tryMove(0, -1);
       if (e.key == "s") this.player.tryMove(0, 1);
       if (e.key == "a") this.player.tryMove(-1, 0);
@@ -81,47 +74,43 @@ let Game = {
       this.draw();
     }, interval);
   },
-    showTitle() {
+  showTitle() {
     this.ctx.fillStyle = "rgba(0,0,0,.75)";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawText("RogueJS", 70, true, this.canvas.height / 2 - 110, "white");
+    this.drawText("RogueJS", 50, true, this.canvas.height / 2 - 110, "white");
     this.drawText(
-      "A Light RogueLike JavaScript Game Engine...",
-      40,
+      "<A RogueLike/Roguelite Game Engine in Javascript>",
+      25,
       true,
       this.canvas.height / 2 - 50,
       "white"
-      );
-      this.gameState = "title";
+    );
+    this.gameState = "title";
   },
 
   startGame() {
-    console.log('starting')
     this.level = 1;
     this.startLevel(this.startingHp);
     this.gameState = "running";
   },
 
   startLevel(playerHp) {
-    console.log('level starting')
-   
     this.spawnRate = 15;
     this.spawnCounter = this.spawnRate;
     this.map.generateLevel();
     this.player = new Player(this.map.randomPassableTile());
-     this.gameLoop();
+    this.gameLoop();
     this.player.hp = playerHp;
     this.map.randomPassableTile().replace(Exit);
   },
   draw() {
     if (this.gameState == "running" || this.gameState == "dead") {
-  
+      this.gameState;
       this.ctx = this.canvas.getCtx();
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       for (let i = 0; i < this.numTiles; i++) {
         for (let j = 0; j < this.numTiles; j++) {
-         
           this.map.getTile(i, j).draw();
         }
       }
@@ -129,8 +118,10 @@ let Game = {
         this.map.monsters[i].draw();
       }
       // Draws Character
+      this.drawText(this.level, 25, true, 100, "white");
+
+      // this.drawText("Level: " + this.level, 30, false, 40, "white");
       this.player.draw();
-      this.drawText("Level: " + this.level, 30, false, 40, "violet");
     }
   },
   drawText(text, size, centered, textY, color) {
@@ -165,8 +156,7 @@ let Game = {
   },
   registerMonsters(arr) {
     this.monsterClasses = arr;
-  },
-
+  }
 };
 
 export default Game;

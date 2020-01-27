@@ -14,8 +14,10 @@ export default class Entity {
   }
   draw() {
     this.ctx = Game.canvas.getCtx();
-    this.spritesheet = new SpriteSheet(this.ctx, Game.tilesize);
-
+    this.spritesheet = new SpriteSheet({
+      ctx: this.ctx,
+      tilesize: Game.tilesize
+    });
     if (this.teleportCounter > 0) {
       this.spritesheet.drawSprite(10, this.tile.x, this.tile.y);
     } else {

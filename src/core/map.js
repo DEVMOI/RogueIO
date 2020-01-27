@@ -1,18 +1,16 @@
 import Game from "./game";
 import Wall from "./wall";
 import Floor from "./floor";
-import Exit from './exit';
+import Exit from "./exit";
 import util from "./util";
 
-
 export default class Map {
-  constructor( numTiles) {
+  constructor(numTiles) {
     this.numTiles = numTiles;
     this.tiles = [];
     this.monsters = null;
   }
   generateLevel() {
-    console.log("map created");
     util.tryTo("generate map", () => {
       return (
         this.generateTiles() ==
