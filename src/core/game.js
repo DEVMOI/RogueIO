@@ -69,7 +69,7 @@ let Game = {
       if (e.key == "d") this.player.tryMove(1, 0);
     }
   },
-  gameLoop(interval = 15) {
+  gameLoop(interval = 100) {
     setInterval(() => {
       this.draw();
     }, interval);
