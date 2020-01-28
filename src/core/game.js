@@ -118,9 +118,8 @@ let Game = {
         this.map.monsters[i].draw();
       }
       // Draws Character
-      this.drawText(this.level, 25, true, 100, "white");
-
-      // this.drawText("Level: " + this.level, 30, false, 40, "white");
+      
+      this.drawText("Level: " + this.level, 30, false, 40, "white");
       this.player.draw();
     }
   },
@@ -131,7 +130,7 @@ let Game = {
     if (centered) {
       textX = (this.canvas.width - this.ctx.measureText(text).width) / 2;
     } else {
-      textX = this.canvas.width - this.uiWidth * this.tileSize + 25;
+      textX = this.canvas.width - this.uiWidth * this.tilesize + 15;
     }
 
     this.ctx.fillText(text, textX, textY);
