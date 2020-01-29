@@ -1,3 +1,4 @@
+import Game from "./game";
 import Tile from "./tile";
 export default class Floor extends Tile {
   constructor(x, y) {
@@ -5,10 +6,10 @@ export default class Floor extends Tile {
   }
   stepOn(monster) {
     //TODO: complete
-    if(monster.isPlayer && this.treasure){
-      score++
+    if (monster.isPlayer && this.treasure) {
+      score++;
       this.treasure = false;
-      this.spawnMonster()
+      Game.map.spawnMonster();
     }
   }
 }

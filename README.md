@@ -1,11 +1,9 @@
 # RogueJS
 
 > A RogueLike/Roguelite Javascript Library/Game Engine built with ❤
-
-### Communication Platforms
-
-> [Discord](https://discord.gg/atuZfDJ)
-
+<!-- BADGES -->
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/NodeGG/RogueJS/blob/master/LICENSE) [![Twitter Follow](https://img.shields.io/badge/follow-%40MOIKUNE-blue.svg?style=for-the-badge&logo=twitter)](https://twitter.com/MOIKUNE) [![Discord](https://img.shields.io/discord/160837478004031488?style=for-the-badge&logo=discord)](https://discord.gg/atuZfDJ) [![Reddit](https://img.shields.io/badge/Reddit-Join-blue?style=for-the-badge&logo=reddit)](https://www.reddit.com/r/RogueJS) [![Downloads](https://img.shields.io/github/downloads/NodeGG/RogueJS/total.svg?style=for-the-badge)](https://github.com/NodeGG/RogueJS/releases)
+<!-- BADGES END -->
 ### Intended Features
 
 - [ ] Basic Game Engine
