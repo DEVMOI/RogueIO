@@ -4,7 +4,7 @@ import Tile from "./tile";
 import SpriteSheet from "./spritesheet";
 import Player from "./player";
 import Exit from "./exit";
-import util from './util'
+import util from "./util";
 let Game = {
   x: 0,
   y: 0,

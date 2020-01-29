@@ -2,11 +2,11 @@ import Game from "./game";
 import SpriteSheet from "./spritesheet";
 import util from "./util";
 export default class Tile {
-  constructor(x, y, spritesheet, passable) {
+  constructor(x, y, sprite, passable) {
     this.ctx = null;
     this.x = x;
     this.y = y;
-    this.spritesheet = spritesheet;
+    this.sprite = sprite;
     this.passable = passable;
   }
   replace(newTileType) {
@@ -50,11 +50,14 @@ export default class Tile {
   }
   draw() {
     this.ctx = Game.canvas.getCtx();
-    let sprite = new SpriteSheet({ ctx: this.ctx, tilesize: Game.tilesize });
-    sprite.drawSprite(this.spritesheet, this.x, this.y);
+    let spriteSheet = new SpriteSheet({
+      ctx: this.ctx,
+      tilesize: Game.tilesize
+    });
+    spriteSheet.drawSprite(this.sprite, this.x, this.y);
+    console.log(this.sprite)
     if (this.treasure) {
-      sprite.drawSprite(12, this.x, this.y);
-    }   
-
+      spriteSheet.drawSprite(12, this.x, this.y);
+    }
   }
 }

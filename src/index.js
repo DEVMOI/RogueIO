@@ -9,6 +9,17 @@ import Floor from "./core/floor";
 import Wall from "./core/wall";
 import Entity from "./core/entity";
 const RogueJs = () => {
-  return { Game, Canvas, SpriteSheet, Map, Player, Entity, Tile, Util, Floor, Wall };
+  return {
+    Game,
+    Canvas,
+    SpriteSheet,
+    Map,
+    Player,
+    Entity,
+    Tile,
+    Util,
+    Floor,
+    Wall
+  };
 };
 export default RogueJs;

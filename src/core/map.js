@@ -18,7 +18,7 @@ export default class Map {
       );
     });
     this.generateMonsters();
-    for( let i; i = 0; i<3, i++){
+    for (let i; (i = 0); i < 3, i++) {
       this.randomPassableTile().treasure = true;
     }
   }
