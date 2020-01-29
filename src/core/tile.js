@@ -52,5 +52,9 @@ export default class Tile {
     this.ctx = Game.canvas.getCtx();
     let sprite = new SpriteSheet({ ctx: this.ctx, tilesize: Game.tilesize });
     sprite.drawSprite(this.spritesheet, this.x, this.y);
+    if (this.treasure) {
+      sprite.drawSprite(12, this.x, this.y);
+    }   
+
   }
 }

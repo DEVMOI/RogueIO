@@ -4,7 +4,7 @@ import Tile from "./tile";
 import SpriteSheet from "./spritesheet";
 import Player from "./player";
 import Exit from "./exit";
-
+import util from './util'
 let Game = {
   x: 0,
   y: 0,
@@ -13,7 +13,7 @@ let Game = {
 
   level: 1,
   numLevels: 6,
-
+  score: 0,
   startingHp: 3,
   maxHp: 6,
 
@@ -77,6 +77,7 @@ let Game = {
   showTitle() {
     this.ctx.fillStyle = "rgba(0,0,0,.75)";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.gameState = "title";
     this.drawText("RogueJS", 50, true, this.canvas.height / 2 - 110, "white");
     this.drawText(
       "<A RogueLike/Roguelite Game Engine in Javascript>",
@@ -85,7 +86,7 @@ let Game = {
       this.canvas.height / 2 - 50,
       "white"
     );
-    this.gameState = "title";
+    this.drawScore();
   },
 
   startGame() {
@@ -118,9 +119,10 @@ let Game = {
         this.map.monsters[i].draw();
       }
       // Draws Character
-      
-      this.drawText("Level: " + this.level, 30, false, 40, "white");
       this.player.draw();
+
+      this.drawText("Level: " + this.level, 30, false, 40, "white");
+      this.drawText("Score: " + this.score, 30, false, 70, "white");
     }
   },
   drawText(text, size, centered, textY, color) {
@@ -135,6 +137,38 @@ let Game = {
 
     this.ctx.fillText(text, textX, textY);
   },
+  drawScore() {
+    let scores = this.getScore();
+    if (scores.length) {
+      this.drawText(
+        util.rightPad(["Run", "Score", "Total"]),
+        18,
+        true,
+        this.canvas.height / 2,
+        "white"
+      );
+
+      let newestScore = scores.pop();
+      scores.sort(() => {
+        return b.totalScore - a.totalScore;
+      });
+      scores.unshift(newestScore);
+      for (let i = 0; i < Math.min(10, scores.length); i++) {
+        let scoreText = util.rightPad([
+          scores[i].run,
+          scores[i].score,
+          scores[i].totalScore
+        ]);
+        this.drawText(
+          scoreText,
+          18,
+          true,
+          this.canvas.height / 2 + 24 + i * 24,
+          i == 0 ? "aqua" : "violet"
+        );
+      }
+    }
+  },
   tick() {
     for (let k = this.map.monsters.length - 1; k >= 0; k--) {
       if (!this.map.monsters[k].dead) {
@@ -144,6 +178,7 @@ let Game = {
       }
     }
     if (this.player.dead) {
+      this.addScore(this.score, false);
       this.gameState = "dead";
     }
     this.spawnCounter--;
@@ -155,6 +190,33 @@ let Game = {
   },
   registerMonsters(arr) {
     this.monsterClasses = arr;
+  },
+  getScore() {
+    if (localStorage["scores"]) {
+      return JSON.parse(localStorage["scores"]);
+    } else {
+      return [];
+    }
+  },
+  addScore(score, won) {
+    let scores = this.getScore();
+    let scoresObject = {
+      score: this.score,
+      run: 1,
+      totalScore: this.score,
+      active: won
+    };
+    let lastScore = scores.pop();
+    if (lastScore) {
+      if (lastScore.active) {
+        scoresObject.run = lastScore.totalScore + 1;
+        scoresObject.totalScore = localStorage.totalScore;
+      } else {
+        scores.push(scoresObject);
+
+        localStorage["scores"] = JSON.stringify(scores);
+      }
+    }
   }
 };
 

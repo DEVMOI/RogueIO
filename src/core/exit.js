@@ -8,6 +8,7 @@ export default class Exit extends Tile {
   stepOn(monster) {
     if (monster.isPlayer) {
       if (Game.level == Game.numLevels) {
+        Game.addScore(Game.score, true)
         Game.showTitle();
       } else {
         Game.level++;

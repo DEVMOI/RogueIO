@@ -5,5 +5,10 @@ export default class Floor extends Tile {
   }
   stepOn(monster) {
     //TODO: complete
+    if(monster.isPlayer && this.treasure){
+      score++
+      this.treasure = false;
+      this.spawnMonster()
+    }
   }
 }
