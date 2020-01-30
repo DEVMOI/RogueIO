@@ -17,6 +17,10 @@ let Game = {
   startingHp: 3,
   maxHp: 6,
 
+  shakeAmount: 0,
+  shakeX: 0,
+  shakeY: 0,
+
   spawnRate: null,
   spawnCounter: null,
 
@@ -36,6 +40,10 @@ let Game = {
   playerClass: null,
   monsterClasses: [],
 
+  //Sounds Manager Code
+  sounds: {},
+  // Combat Manager
+  numActions: 1,
   init() {
     this.canvas = new Canvas({
       tilesize: this.tilesize,
@@ -54,6 +62,8 @@ let Game = {
     this.sprite.spriteSheet.src = this.tileSet;
     this.sprite.spriteSheet.onload = this.showTitle();
     this.map = new Map(this.numTiles);
+    // Move to Sound Manager
+    this.initSounds();
 
     window.addEventListener("keydown", this);
   },
@@ -67,9 +77,11 @@ let Game = {
       if (e.key == "s") this.player.tryMove(0, 1);
       if (e.key == "a") this.player.tryMove(-1, 0);
       if (e.key == "d") this.player.tryMove(1, 0);
+
+      if (e.key >= 1 && e.key <= 9) this.player.performAction(e.key - 1);
     }
   },
-  gameLoop(interval = 100) {
+  gameLoop(interval = 15) {
     setInterval(() => {
       this.draw();
     }, interval);
@@ -95,21 +107,24 @@ let Game = {
     this.gameState = "running";
   },
 
-  startLevel(playerHp) {
+  startLevel(playerHp, playerActions) {
     this.spawnRate = 15;
     this.spawnCounter = this.spawnRate;
     this.map.generateLevel();
     this.player = new Player(this.map.randomPassableTile());
-    this.gameLoop();
     this.player.hp = playerHp;
+    if(playerActions){
+      this.player.actions = playerActions
+    }
     this.map.randomPassableTile().replace(Exit);
+    this.gameLoop();
   },
   draw() {
     if (this.gameState == "running" || this.gameState == "dead") {
       this.gameState;
       this.ctx = this.canvas.getCtx();
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+      this.screenShake();
       for (let i = 0; i < this.numTiles; i++) {
         for (let j = 0; j < this.numTiles; j++) {
           this.map.getTile(i, j).draw();
@@ -123,6 +138,10 @@ let Game = {
 
       this.drawText("Level: " + this.level, 30, false, 40, "white");
       this.drawText("Score: " + this.score, 30, false, 70, "white");
+      for (let i = 0; i < this.player.actions.length; i++) {
+        let actionText = i + 1 + ") " + (this.player.actions[i] || "");
+        this.drawText(actionText, 20, false, 110 + i * 40, "aqua");
+      }
     }
   },
   drawText(text, size, centered, textY, color) {
@@ -149,7 +168,7 @@ let Game = {
       );
 
       let newestScore = scores.pop();
-      scores.sort(() => {
+      scores.sort((a, b) => {
         return b.totalScore - a.totalScore;
       });
       scores.unshift(newestScore);
@@ -201,22 +220,54 @@ let Game = {
   addScore(score, won) {
     let scores = this.getScore();
     let scoresObject = {
-      score: this.score,
+      score: score,
       run: 1,
-      totalScore: this.score,
+      totalScore: score,
       active: won
     };
     let lastScore = scores.pop();
     if (lastScore) {
       if (lastScore.active) {
-        scoresObject.run = lastScore.totalScore + 1;
-        scoresObject.totalScore = localStorage.totalScore;
+        scoresObject.run = lastScore.run + 1;
+        scoresObject.totalScore += localStorage.totalScore;
       } else {
-        scores.push(scoresObject);
-
-        localStorage["scores"] = JSON.stringify(scores);
+        scores.push(lastScore);
       }
     }
+    scores.push(scoresObject);
+    localStorage["scores"] = JSON.stringify(scores);
+  },
+  screenShake() {
+    if (this.shakeAmount) {
+      this.shakeAmount--;
+    }
+    let shakeAngle = Math.random() * Math.PI * 2;
+    this.shakeX = Math.round(Math.cos(shakeAngle) * this.shakeAmount);
+    this.shakeY = Math.round(Math.sin(shakeAngle) + this.shakeAmount);
+  },
+  // Sound Manager Code
+  initSounds() {
+    this.sounds = {
+      hit1: new Audio(
+        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/hit1.wav"
+      ),
+      hit2: new Audio(
+        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/hit2.wav"
+      ),
+      treasure: new Audio(
+        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/treasure.wav"
+      ),
+      newLevel: new Audio(
+        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/newLevel.wav"
+      ),
+      spell: new Audio(
+        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/spell.wav"
+      )
+    };
+  },
+  playSound(soundName) {
+    this.sounds[soundName].currentTime = 0;
+    this.sounds[soundName].play();
   }
 };
 

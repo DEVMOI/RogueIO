@@ -7,7 +7,12 @@ export default class Floor extends Tile {
   stepOn(monster) {
     //TODO: complete
     if (monster.isPlayer && this.treasure) {
-      score++;
+      Game.score++;
+      if (Game.score % 3 == 0 && Game.numActions < 9) {
+        Game.numActions++;
+        Game.player.addSpell();
+      }   
+      Game.playSound('treasure')
       this.treasure = false;
       Game.map.spawnMonster();
     }

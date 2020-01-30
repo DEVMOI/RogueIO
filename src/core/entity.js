@@ -8,9 +8,18 @@ export default class Entity {
     this.sprite = sprite;
     this.hp = hp;
     this.teleportCounter = 2;
+    this.offsetX = 0;
+    this.offsetY = 0;
   }
   heal(damage) {
     this.hp = Math.min(Game.maxHp, this.hp + damage);
+  }
+  getDisplayX() {
+    return this.tile.x + this.offsetX;
+  }
+
+  getDisplayY() {
+    return this.tile.y + this.offsetY;
   }
   draw() {
     this.ctx = Game.canvas.getCtx();
@@ -19,18 +28,24 @@ export default class Entity {
       tilesize: Game.tilesize
     });
     if (this.teleportCounter > 0) {
-      this.spritesheet.drawSprite(10, this.tile.x, this.tile.y);
+      this.spritesheet.drawSprite(10, this.getDisplayX(), this.getDisplayY());
     } else {
-      this.spritesheet.drawSprite(this.sprite, this.tile.x, this.tile.y);
+      this.spritesheet.drawSprite(
+        this.sprite,
+        this.getDisplayX(),
+        this.getDisplayY()
+      );
       this.drawHp();
     }
+    this.offsetX -= Math.sign(this.offsetX) * (1 / 8);
+    this.offsetY -= Math.sign(this.offsetY) * (1 / 8);
   }
   drawHp() {
     for (let i = 0; i < this.hp; i++) {
       this.spritesheet.drawSprite(
         9,
-        this.tile.x + (i % 3) * (5 / 16),
-        this.tile.y - Math.floor(i / 3) * (5 / 16)
+        this.getDisplayX() + (i % 3) * (5 / 16),
+        this.getDisplayY() - Math.floor(i / 3) * (5 / 16)
       );
     }
   }
@@ -44,6 +59,11 @@ export default class Entity {
           this.attackedThisTurn = true;
           newTile.monster.stunned = true;
           newTile.monster.hit(1);
+
+          Game.shakeAmount = 5 
+
+          this.offsetX = (newTile.x - this.tile.x) / 2;
+          this.offsetY = (newTile.y - this.tile.y) / 2;
         }
       }
       return true;
@@ -76,6 +96,12 @@ export default class Entity {
     if (this.hp <= 0) {
       this.die();
     }
+
+    if (this.isPlayer) {
+      Game.playSound("hit1")
+    } else {
+      Game.playSound("hit2");
+    }
   }
 
   die() {
@@ -87,6 +113,8 @@ export default class Entity {
   move(tile) {
     if (this.tile) {
       this.tile.monster = null;
+      this.offsetX = this.tile.x - tile.x;
+      this.offsetY = this.tile.y - tile.y;
     }
     this.tile = tile;
     tile.monster = this;

@@ -9,6 +9,7 @@ export default class Map {
     this.numTiles = numTiles;
     this.tiles = [];
     this.monsters = null;
+    this.treasure = null;
   }
   generateLevel() {
     util.tryTo("generate map", () => {
@@ -18,7 +19,7 @@ export default class Map {
       );
     });
     this.generateMonsters();
-    for (let i; (i = 0); i < 3, i++) {
+    for (let i= 0; i < 3; i++) {
       this.randomPassableTile().treasure = true;
     }
   }
