@@ -55,9 +55,18 @@ export default class Tile {
       tilesize: Game.tilesize
     });
     spriteSheet.drawSprite(this.sprite, this.x, this.y);
-    console.log(this.sprite)
     if (this.treasure) {
       spriteSheet.drawSprite(12, this.x, this.y);
     }
+    if (this.effectCounter) {
+      this.effectCounter--;
+      this.ctx.globalAlpha = this.effectCounter / 30;
+      spriteSheet.drawSprite(this.effect, this.x, this.y);
+      this.ctx.globalAlpha = 1;
+    }
+  }
+  setEffect(effectSprite) {
+    this.effect = effectSprite;
+    this.effectCounter = 30;
   }
 }

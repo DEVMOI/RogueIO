@@ -1,3 +1,4 @@
+import AssetManager from "./AssetManager";
 import Game from "./game";
 import SpriteSheet from "./spritesheet";
 export default class Entity {
@@ -10,10 +11,13 @@ export default class Entity {
     this.teleportCounter = 2;
     this.offsetX = 0;
     this.offsetY = 0;
+    this.lastMove = [-1, 0];
+    this.bonusAttack = 0;
   }
   heal(damage) {
     this.hp = Math.min(Game.maxHp, this.hp + damage);
   }
+  
   getDisplayX() {
     return this.tile.x + this.offsetX;
   }
@@ -52,15 +56,17 @@ export default class Entity {
   tryMove(dx, dy) {
     let newTile = this.tile.getNeighbor(dx, dy);
     if (newTile.passable) {
+      this.lastMove = [dx, dy];
       if (!newTile.monster) {
         this.move(newTile);
       } else {
         if (this.isPlayer != newTile.monster.isPlayer) {
           this.attackedThisTurn = true;
           newTile.monster.stunned = true;
-          newTile.monster.hit(1);
+          newTile.monster.hit(1 + this.bonusAttack);
+          this.bonusAttack = 0;
 
-          Game.shakeAmount = 5 
+          Game.shakeAmount = 5;
 
           this.offsetX = (newTile.x - this.tile.x) / 2;
           this.offsetY = (newTile.y - this.tile.y) / 2;
@@ -92,15 +98,17 @@ export default class Entity {
     }
   }
   hit(damage) {
+    if (this.sheild > 0) {
+    }
     this.hp -= damage;
     if (this.hp <= 0) {
       this.die();
     }
 
     if (this.isPlayer) {
-      Game.playSound("hit1")
+      AssetManager.playSound("hit1");
     } else {
-      Game.playSound("hit2");
+      AssetManager.playSound("hit2");
     }
   }
 

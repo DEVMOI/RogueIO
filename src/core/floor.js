@@ -1,3 +1,4 @@
+import AssetManager from "./AssetManager";
 import Game from "./game";
 import Tile from "./tile";
 export default class Floor extends Tile {
@@ -11,8 +12,8 @@ export default class Floor extends Tile {
       if (Game.score % 3 == 0 && Game.numActions < 9) {
         Game.numActions++;
         Game.player.addSpell();
-      }   
-      Game.playSound('treasure')
+      }
+      AssetManager.playSound("treasure");
       this.treasure = false;
       Game.map.spawnMonster();
     }

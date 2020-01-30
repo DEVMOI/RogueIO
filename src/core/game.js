@@ -1,9 +1,11 @@
+import AssetManager from "./AssetManager";
 import Canvas from "./canvas";
 import Map from "./map";
 import Tile from "./tile";
 import SpriteSheet from "./spritesheet";
 import Player from "./player";
 import Exit from "./exit";
+
 import util from "./util";
 let Game = {
   x: 0,
@@ -39,11 +41,8 @@ let Game = {
   player: null,
   playerClass: null,
   monsterClasses: [],
-
-  //Sounds Manager Code
-  sounds: {},
   // Combat Manager
-  numActions: 1,
+  numActions: 9,
   init() {
     this.canvas = new Canvas({
       tilesize: this.tilesize,
@@ -63,7 +62,23 @@ let Game = {
     this.sprite.spriteSheet.onload = this.showTitle();
     this.map = new Map(this.numTiles);
     // Move to Sound Manager
-    this.initSounds();
+    AssetManager.initSounds({
+      hit1: new Audio(
+        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/hit1.wav"
+      ),
+      hit2: new Audio(
+        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/hit2.wav"
+      ),
+      treasure: new Audio(
+        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/treasure.wav"
+      ),
+      newLevel: new Audio(
+        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/newLevel.wav"
+      ),
+      spell: new Audio(
+        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/spell.wav"
+      )
+    });
 
     window.addEventListener("keydown", this);
   },
@@ -113,8 +128,8 @@ let Game = {
     this.map.generateLevel();
     this.player = new Player(this.map.randomPassableTile());
     this.player.hp = playerHp;
-    if(playerActions){
-      this.player.actions = playerActions
+    if (playerActions) {
+      this.player.actions = playerActions;
     }
     this.map.randomPassableTile().replace(Exit);
     this.gameLoop();
@@ -196,6 +211,7 @@ let Game = {
         this.map.monsters.splice(k, 1);
       }
     }
+    Game.player.update();
     if (this.player.dead) {
       this.addScore(this.score, false);
       this.gameState = "dead";
@@ -244,30 +260,6 @@ let Game = {
     let shakeAngle = Math.random() * Math.PI * 2;
     this.shakeX = Math.round(Math.cos(shakeAngle) * this.shakeAmount);
     this.shakeY = Math.round(Math.sin(shakeAngle) + this.shakeAmount);
-  },
-  // Sound Manager Code
-  initSounds() {
-    this.sounds = {
-      hit1: new Audio(
-        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/hit1.wav"
-      ),
-      hit2: new Audio(
-        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/hit2.wav"
-      ),
-      treasure: new Audio(
-        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/treasure.wav"
-      ),
-      newLevel: new Audio(
-        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/newLevel.wav"
-      ),
-      spell: new Audio(
-        "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/spell.wav"
-      )
-    };
-  },
-  playSound(soundName) {
-    this.sounds[soundName].currentTime = 0;
-    this.sounds[soundName].play();
   }
 };
 

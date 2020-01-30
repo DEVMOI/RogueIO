@@ -1,6 +1,6 @@
 # RogueJS
 
-> A RogueLike/Roguelite Javascript Library/Game Engine built with ❤
+> A RogueLike Javascript Library/Game Engine built with ❤
 
 <!-- BADGES -->
 
@@ -61,3 +61,5 @@
 
 - https://nluqo.github.io/broughlike-tutorial/index.html
 - https://www.reddit.com/r/roguelikedev/wiki/python_tutorial_series
+- https://straker.github.io/kontra/
+- https://ondras.github.io/rot.js/hp/

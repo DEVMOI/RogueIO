@@ -1,21 +1,21 @@
-import Game from "./core/game";
+import AssetManager from "./core/AssetManager";
 import Canvas from "./core/canvas";
-import SpriteSheet from "./core/spritesheet";
+import Entity from "./core/entity";
+import Game from "./core/game";
 import Map from "./core/map";
-import Player from "./core/player";
+import SpriteSheet from "./core/spritesheet";
 import Tile from "./core/tile";
 import Util from "./core/util";
 import Floor from "./core/floor";
 import Wall from "./core/wall";
-import Entity from "./core/entity";
 const RogueJs = () => {
   return {
-    Game,
+    AssetManager,
     Canvas,
-    SpriteSheet,
-    Map,
-    Player,
     Entity,
+    Game,
+    Map,
+    SpriteSheet,
     Tile,
     Util,
     Floor,

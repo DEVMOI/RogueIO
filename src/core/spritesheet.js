@@ -18,8 +18,8 @@ export default class SpriteSheet {
         0,
         16,
         16,
-        x * this.tilesize +Game.shakeX,
-        y * this.tilesize +Game.shakeY,
+        x * this.tilesize + Game.shakeX,
+        y * this.tilesize + Game.shakeY,
         this.tilesize,
         this.tilesize
       );

@@ -1,7 +1,8 @@
+import AssetManager from "./AssetManager";
 import Game from "./game";
 import Entity from "./entity";
+import Actions from "../../Examples/Actions/actions";
 import util from "./util";
-import Actions from "./actions";
 export default class Player extends Entity {
   constructor(tile) {
     super(tile, 0, 3);
@@ -10,6 +11,9 @@ export default class Player extends Entity {
     this.actions = util
       .shuffle(Object.keys(Actions))
       .splice(0, Game.numActions);
+  }
+  update() {
+    this.shield--;
   }
   tryMove(dx, dy) {
     if (super.tryMove(dx, dy)) {
@@ -25,9 +29,8 @@ export default class Player extends Entity {
     let actionName = this.actions[index];
     if (actionName) {
       delete this.actions[index];
-      alert(actionName)
-      this.actions.actionName();
-      Game.playSound("spell");
+      Actions[actionName]();
+      AssetManager.playSound("spell");
       Game.tick();
     }
   }
