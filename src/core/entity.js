@@ -1,4 +1,4 @@
-import AssetManager from "./AssetManager";
+import { initSounds, playSound } from "./AssetManager";
 import Game from "./game";
 import SpriteSheet from "./spritesheet";
 export default class Entity {
@@ -106,9 +106,9 @@ export default class Entity {
     }
 
     if (this.isPlayer) {
-      AssetManager.playSound("hit1");
+      playSound("hit1");
     } else {
-      AssetManager.playSound("hit2");
+      playSound("hit2");
     }
   }
 

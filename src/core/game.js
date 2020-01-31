@@ -1,4 +1,4 @@
-import AssetManager from "./AssetManager";
+import { initSounds, playSound } from "./AssetManager";
 import Canvas from "./canvas";
 import Map from "./map";
 import Options from "./options";
@@ -38,7 +38,7 @@ class Game {
     Options.sprite.spriteSheet.onload = this.showTitle();
     Options.map = new Map(Options.numTiles);
     // Move to Sound Manager
-    AssetManager.initSounds({
+    initSounds({
       hit1: new Audio(
         "https://raw.githubusercontent.com/nluqo/broughlike-tutorial/master/docs/completed/stage7/sounds/hit1.wav"
       ),

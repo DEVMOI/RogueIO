@@ -1,4 +1,4 @@
-import AssetManager from "./AssetManager";
+import { playSound } from "./AssetManager";
 import Game from "./game";
 import Entity from "./entity";
 import Actions from "../../Examples/Actions/actions";
@@ -30,7 +30,7 @@ export default class Player extends Entity {
     if (actionName) {
       delete this.actions[index];
       Actions[actionName]();
-      AssetManager.playSound("spell");
+      playSound("spell");
       Game.tick();
     }
   }

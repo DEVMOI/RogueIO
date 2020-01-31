@@ -1,4 +1,4 @@
-import AssetManager from "./AssetManager";
+import { playSound } from "./AssetManager";
 import Game from "./game";
 import Tile from "./tile";
 export default class Floor extends Tile {
@@ -13,7 +13,7 @@ export default class Floor extends Tile {
         Game.numActions++;
         Game.player.addSpell();
       }
-      AssetManager.playSound("treasure");
+      playSound("treasure");
       this.treasure = false;
       Game.map.spawnMonster();
     }
