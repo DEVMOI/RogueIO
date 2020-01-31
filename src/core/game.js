@@ -9,14 +9,15 @@ import Exit from "./exit";
 
 import util from "./util";
 class Game {
-  constructor() {}
+  constructor() {
+    this.options = Options;
+  }
   static setOptions(opts) {
     if (typeof opts == "object") {
       for (var prop in opts) {
         Options[prop] = opts[prop];
       }
     }
-    console.log(Options);
   }
   init() {
     Options.canvas = new Canvas({

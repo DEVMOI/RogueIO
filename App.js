@@ -1,7 +1,10 @@
 // // import init from "./lib";
-// import Options from "./src/core/options";
+import Options from "./src/core/options";
 import RogueJs from "./src";
-let { Game } = RogueJs;
+let { Game, EventManager, Canvas } = RogueJs;
+const { init } = Canvas;
+const { setOptions } = Game;
+// const { callback } = EventManager;
 // import { Blob, Ent, Golem, MerQueen, Raptor } from "./Examples";
 
 // // Game.numTiles = 7;
@@ -40,5 +43,9 @@ let options = {
 };
 // Game.registerMonsters(arr);
 let game = new Game();
-game.init();
-Game.setOptions(options);
+// Game.init();
+setOptions(options);
+console.log(game.options);
+console.log(Options);
+let { canvas, context } = init("RogueJS");
+canvas.height = 300;

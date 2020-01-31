@@ -1,5 +1,5 @@
 import AssetManager from "./core/AssetManager";
-import Canvas from "./core/canvas";
+import * as Canvas from "./core/canvas";
 // import Entity from "./core/entity";
 import Game from "./core/game";
 import Map from "./core/map";
@@ -9,17 +9,19 @@ import Tile from "./core/tile";
 import Util from "./core/util";
 // import Floor from "./core/floor";
 // import Wall from "./core/wall";
-let RogueJs
-export default RogueJs= {
+import EventManager from "./core/EventManager";
+let RogueJs;
+export default RogueJs = {
   AssetManager,
   Canvas,
   // Entity,
+  EventManager,
   Game,
   // Map,
   Options,
   SpriteSheet,
   Tile,
-  Util,
+  Util
   // Floor,
   // Wall
 };
