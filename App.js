@@ -1,13 +1,8 @@
-// // import init from "./lib";
+// import RogueJS from "./index.js";
 import Options from "./src/core/options";
 import RogueJS from "./src";
-let { init } = RogueJS;
-// const { setOptions } = Game;
-// const { callback } = EventManager;
-// import { Blob, Ent, Golem, MerQueen, Raptor } from "./Examples";
+let { init, RNG, Map } = RogueJS;
 
-// // Game.numTiles = 7;
-// let arr = [Blob, Raptor, Golem, Ent, MerQueen];
 let options = {
   level: 1,
   numLevels: 6,
@@ -41,8 +36,14 @@ let options = {
   numActions: 9
 };
 
-// Game.init();
-// console.log(game.options);
 console.log(Options);
+console.log(RNG.getSeed());
 let { canvas, context } = init();
 canvas.height = 500;
+var w = 40,
+  h = 25;
+var map = new Map.Digger(w, h);
+
+for (var i = 0; i < 4; i++) {
+  map.create(this);
+}

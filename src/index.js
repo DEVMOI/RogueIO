@@ -23,6 +23,7 @@ export {
   unbindKeys,
   keyPressed
 } from "./core/keyboard.js";
+export { default as Map } from "./core/map/index.js";
 export {
   registerPlugin,
   unregisterPlugin,
@@ -40,6 +41,7 @@ export {
 } from "./core/pointer.js";
 export { default as Pool } from "./core/pool.js";
 export { default as Quadtree } from "./core/quadtree.js";
+export { default as RNG } from "./core/rng.js";
 export { default as Sprite } from "./core/sprite.js";
 export { default as SpriteSheet } from "./core/spritesheet.js";
 export { setStoreItem, getStoreItem } from "./core/store.js";

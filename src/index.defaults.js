@@ -21,6 +21,7 @@ import {
   unbindKeys,
   keyPressed
 } from "./core/keyboard.js";
+import Map from './core/map/index.js'
 import {
   registerPlugin,
   unregisterPlugin,
@@ -37,6 +38,8 @@ import {
   pointerPressed
 } from "./core/pointer.js";
 import Pool from "./core/pool.js";
+
+import RNG from "./core/rng.js";
 import Quadtree from "./core/quadtree.js";
 import Sprite from "./core/sprite.js";
 import SpriteSheet from "./core/spritesheet.js";
@@ -73,7 +76,7 @@ let RogueJS = {
   bindKeys,
   unbindKeys,
   keyPressed,
-
+  Map,
   registerPlugin,
   unregisterPlugin,
   extendObject,
@@ -89,6 +92,7 @@ let RogueJS = {
 
   Pool,
   Quadtree,
+  RNG,
   Sprite,
   SpriteSheet,
 
