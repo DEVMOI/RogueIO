@@ -1,5 +1,5 @@
 /*!
- * RougeJs
+ * RougeJS
  * MIT Licensed
  */
 

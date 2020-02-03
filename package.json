@@ -1,6 +1,6 @@
 {
   "name": "roguejs",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A Light Rogue Javascript Game Engine",
   "main": "index.js",
   "scripts": {
