@@ -1,4 +1,4 @@
-import { playSound } from "./AssetManager";
+import { playSound } from "./assetmanager";
 import Game from "./game";
 import Tile from "./tile";
 export default class Floor extends Tile {

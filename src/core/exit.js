@@ -1,4 +1,4 @@
-import AssetManager from "./AssetManager";
+import AssetManager from "./assetmanager";
 import Tile from "./tile";
 import Game from "./game";
 export default class Exit extends Tile {

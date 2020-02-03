@@ -16,14 +16,14 @@ import Vector from "./vector.js";
  * @param {Number} [properties.width] - Width of the sprite.
  * @param {Number} [properties.height] - Height of the sprite.
  *
- * @param {Number} [properties.ttl=Infinity] - How many frames the sprite should be alive. Used by kontra.Pool.
+ * @param {Number} [properties.ttl=Infinity] - How many frames the sprite should be alive. Used by RogueJS.Pool.
  * @param {Number} [properties.rotation=0] - Sprites rotation around the origin in radians.
  * @param {Number} [properties.anchor={x:0,y:0}] - The x and y origin of the sprite. {x:0, y:0} is the top left corner of the sprite, {x:1, y:1} is the bottom right corner.
  *
  * @param {Canvas​Rendering​Context2D} [properties.context] - The context the sprite should draw to. Defaults to [core.getContext()](api/core#getContext).
  *
  * @param {Image|HTMLCanvasElement} [properties.image] - Use an image to draw the sprite.
- * @param {Object} [properties.animations] - An object of [Animations](api/animation) from a kontra.Spritesheet to animate the sprite.
+ * @param {Object} [properties.animations] - An object of [Animations](api/animation) from a RogueJS.Spritesheet to animate the sprite.
  *
  * @param {Function} [properties.update] - Function called every frame to update the sprite.
  * @param {Function} [properties.render] - Function called every frame to render the sprite.
@@ -51,21 +51,21 @@ class Sprite {
     /**
      * The sprites position vector. The sprites position is its position in the world, as opposed to the position in the [viewport](api/sprite#viewX). Typically the position in the world and the viewport are the same value. If the sprite has been [added to a tileEngine](/api/tileEngine#addObject), the position vector represents where in the tile world the sprite is while the viewport represents where to draw the sprite in relation to the top-left corner of the canvas.
      * @memberof Sprite
-     * @property {kontra.Vector} position
+     * @property {RogueJS.Vector} position
      */
     this.position = Vector(x, y);
 
     /**
      * The sprites velocity vector.
      * @memberof Sprite
-     * @property {kontra.Vector} velocity
+     * @property {RogueJS.Vector} velocity
      */
     this.velocity = Vector(dx, dy);
 
     /**
      * The sprites acceleration vector.
      * @memberof Sprite
-     * @property {kontra.Vector} acceleration
+     * @property {RogueJS.Vector} acceleration
      */
     this.acceleration = Vector(ddx, ddy);
 
@@ -82,7 +82,7 @@ class Sprite {
     this.width = this.height = this.rotation = 0;
 
     /**
-     * How may frames the sprite should be alive. Primarily used by kontra.Pool to know when to recycle an object.
+     * How may frames the sprite should be alive. Primarily used by RogueJS.Pool to know when to recycle an object.
      * @memberof Sprite
      * @property {Number} ttl
      */
@@ -95,10 +95,10 @@ class Sprite {
      *
      * @example
      * // exclude-code:start
-     * let { Sprite } = kontra;
+     * let { Sprite } = RogueJS;
      * // exclude-code:end
      * // exclude-script:start
-     * import { Sprite } from 'kontra';
+     * import { Sprite } from 'RogueJS';
      * // exclude-script:end
      *
      * let sprite = Sprite({
@@ -235,10 +235,10 @@ class Sprite {
   }
 
   /**
-   * An object of [Animations](api/animation) from a kontra.SpriteSheet to animate the sprite. Each animation is named so that it can can be used by name for the sprites [playAnimation()](api/sprite#playAnimation) function.
+   * An object of [Animations](api/animation) from a RogueJS.SpriteSheet to animate the sprite. Each animation is named so that it can can be used by name for the sprites [playAnimation()](api/sprite#playAnimation) function.
    *
    * ```js
-   * import { Sprite, SpriteSheet } from 'kontra';
+   * import { Sprite, SpriteSheet } from 'RogueJS';
    *
    * let spriteSheet = SpriteSheet({
    *   // ...
@@ -343,7 +343,7 @@ class Sprite {
     /**
      * The currently playing Animation object if `animations` was passed as an argument.
      * @memberof Sprite
-     * @property {kontra.Animation} currentAnimation
+     * @property {RogueJS.Animation} currentAnimation
      */
     this.currentAnimation = firstAnimation;
     this.width = this.width || firstAnimation.width;
@@ -372,7 +372,7 @@ class Sprite {
   }
 
   /**
-   * Check if the sprite is alive. Primarily used by kontra.Pool to know when to recycle an object.
+   * Check if the sprite is alive. Primarily used by RogueJS.Pool to know when to recycle an object.
    * @memberof Sprite
    * @function isAlive
    *
@@ -388,7 +388,7 @@ class Sprite {
    * **NOTE:** Does not take into account sprite rotation. If you need collision detection between rotated sprites you will need to implement your own `collidesWith()` function. I suggest looking at the Separate Axis Theorem.
    *
    * ```js
-   * import { Sprite } from 'kontra';
+   * import { Sprite } from 'RogueJS';
    *
    * let sprite = Sprite({
    *   x: 100,
@@ -492,7 +492,7 @@ class Sprite {
    * Set the currently playing animation of an animation sprite.
    *
    * ```js
-   * import { Sprite, SpriteSheet } from 'kontra';
+   * import { Sprite, SpriteSheet } from 'RogueJS';
    *
    * let spriteSheet = SpriteSheet({
    *   // ...
@@ -533,7 +533,7 @@ class Sprite {
    * If you override the sprites [update()](api/sprite#update) function with your own update function, you can call this function to move the sprite normally.
    *
    * ```js
-   * import { Sprite } from 'kontra';
+   * import { Sprite } from 'RogueJS';
    *
    * let sprite = Sprite({
    *   x: 100,
@@ -581,7 +581,7 @@ class Sprite {
    * If you override the sprites `render()` function with your own render function, you can call this function to draw the sprite normally.
    *
    * ```js
-   * import { Sprite } from 'kontra';
+   * import { Sprite } from 'RogueJS';
    *
    * let sprite = Sprite({
    *  x: 290,

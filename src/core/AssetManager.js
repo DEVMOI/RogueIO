@@ -1,4 +1,4 @@
-import { emit } from "./EventManager";
+import { emit } from "./eventmanager";
 /**
  * A promise based asset loader for loading images, audio, and data files. An `assetLoaded` event is emitted after each asset is fully loaded. The callback for the event is passed the asset and the url to the asset as parameters.
  *

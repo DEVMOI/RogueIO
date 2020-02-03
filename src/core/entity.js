@@ -1,4 +1,4 @@
-import { initSounds, playSound } from "./AssetManager";
+import { initSounds, playSound } from "./assetmanager";
 import Game from "./game";
 import SpriteSheet from "./spritesheet";
 export default class Entity {

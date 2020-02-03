@@ -1,5 +1,5 @@
 import Options from "./options";
-import { emit } from "./EventManager";
+import { emit } from "./eventmanager";
 
 /**
  * Functions for initializing the RogueJS library and getting the canvas and context

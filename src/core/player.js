@@ -1,4 +1,4 @@
-import { playSound } from "./AssetManager";
+import { playSound } from "./assetmanager";
 import Game from "./game";
 import Entity from "./entity";
 import Actions from "../../Examples/Actions/actions";
