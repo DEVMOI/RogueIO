@@ -15,7 +15,7 @@ export { init, getCanvas, getContext } from "./core/canvas";
 export { on, off, emit } from "./core/eventmanager";
 
 // import Entity from "./core/entity";
-import { default as Game } from "./core/game";
+export { default as Game } from "./core/game";
 export {
   keyMap,
   initKeys,
@@ -48,24 +48,3 @@ export { setStoreItem, getStoreItem } from "./core/store.js";
 export { default as TileEngine } from "./core/tileengine.js";
 export { default as Vector } from "./core/vector.js";
 export { default } from "./index.defaults.js";
-// import Map from "./core/map";
-// import Options from "./core/options";
-// import SpriteSheet from "./core/spritesheet";
-// import Tile from "./core/tile";
-// import Util from "./core/util";
-// import Floor from "./core/floor";
-// import Wall from "./core/wall";
-// export default {
-//   AssetManager,
-//   Canvas,
-//   // Entity,
-//   EventManager,
-//   Game,
-//   // Map,
-//   Options,
-//   SpriteSheet,
-//   Tile,
-//   Util
-//   // Floor,
-//   // Wall
-// };

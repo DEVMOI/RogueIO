@@ -60,7 +60,6 @@ export function init(canvas) {
     document.getElementById(canvas) ||
     canvas ||
     document.querySelector("canvas");
-  console.log(canvasEl)
   // @if DEBUG
   if (!canvasEl) {
     throw Error("You must provide a canvas element for the game");
@@ -68,6 +67,8 @@ export function init(canvas) {
   // @endif
 
   context = canvasEl.getContext("2d");
+  context.font='15px sans-serif';
+  console.log(context.font)
   context.imageSmoothingEnabled = false;
 
   emit("init");

@@ -21,7 +21,7 @@ import {
   unbindKeys,
   keyPressed
 } from "./core/keyboard.js";
-import Map from './core/map/index.js'
+import Map from "./core/map/index.js";
 import {
   registerPlugin,
   unregisterPlugin,
