@@ -1,15 +1,15 @@
-# RogueJS
+# RogueIO
 
 > A RogueLike Javascript Library/Game Engine built with ❤
 
 <!-- BADGES -->
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/NodeGG/RogueJS/blob/master/LICENSE) [![Twitter Follow](https://img.shields.io/badge/follow-%40MOIKUNE-blue.svg?style=for-the-badge&logo=twitter)](https://twitter.com/MOIKUNE) [![Discord](https://img.shields.io/discord/160837478004031488?style=for-the-badge&logo=discord)](https://discord.gg/atuZfDJ) [![Reddit](https://img.shields.io/badge/Reddit-Join-blue?style=for-the-badge&logo=reddit)](https://www.reddit.com/r/RogueJS) [![Downloads](https://img.shields.io/github/downloads/NodeGG/RogueJS/total.svg?style=for-the-badge)](https://github.com/NodeGG/RogueJS/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://github.com/NodeGG/RogueIO/blob/master/LICENSE) [![Twitter Follow](https://img.shields.io/badge/follow-%40MOIKUNE-blue.svg?style=for-the-badge&logo=twitter)](https://twitter.com/MOIKUNE) [![Discord](https://img.shields.io/discord/160837478004031488?style=for-the-badge&logo=discord)](https://discord.gg/atuZfDJ) [![Reddit](https://img.shields.io/badge/Reddit-Join-blue?style=for-the-badge&logo=reddit)](https://www.reddit.com/r/RogueIO)[![NPM](https://img.shields.io/npm/dt/rogueio.svg?style=for-the-badge)](https://www.npmjs.com/package/rogueio)
 
 <!-- BADGES END -->
 
 ## Introduction
-RogueJS is an engine heavily inspired by both Rot.js and KontraJS to the point we merged the two together to create a whole new library for Javascript Game Developers.
+RogueIO is an engine heavily inspired by both Rot.js and KontraJS to the point we merged the two together to create a whole new library for Javascript Game Developers.
 
 ### Intended Features
 
@@ -32,7 +32,7 @@ RogueJS is an engine heavily inspired by both Rot.js and KontraJS to the point w
 
 - [ x ] Event Manager
 
-  - A simple event system. Allows you to hook into RogueJS lifecycle events or create your own, i.e Plugins.
+  - A simple event system. Allows you to hook into RogueIO lifecycle events or create your own, i.e Plugins.
 
 - [ x ] Plugin Manager
 

@@ -1,7 +1,7 @@
-// import RogueJS from "./index.js";
+// import RogueIO from "./index.js";
 import Options from "./src/core/options";
-import RogueJS from "./src";
-let { init, RNG, Map, Sprite, Game } = RogueJS;
+import RogueIO from "./src";
+let { init, RNG, Map, Sprite, Game } = RogueIO;
 
 RNG.setSeed("Miya");
 let { canvas, context } = init();

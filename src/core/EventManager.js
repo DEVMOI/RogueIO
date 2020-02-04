@@ -1,12 +1,12 @@
 /**
- * A Simple Event Manager to allow for user to create their own hooks into RogueJS, or create Events for Plugins
+ * A Simple Event Manager to allow for user to create their own hooks into RogueIO, or create Events for Plugins
  * @section Events
  */
 export let callbacks = {};
 /**
  * 3 Important lifecycle Events:
  * - `init` Emits after Rogue.JS is called
- * - `tick` Emmits every frame of the RogueJs.GameLoop [Loops Update and Render]
+ * - `tick` Emmits every frame of the RogueIO.GameLoop [Loops Update and Render]
  * - `assetload` Emitted after an asset has fully loaded using the asset loader. The callback function is passed the asset and the url of the asset as parameters
  * @section Lifecycel Events
  */

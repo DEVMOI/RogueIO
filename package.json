@@ -1,6 +1,6 @@
 {
-  "name": "roguejs",
-  "version": "0.0.0",
+  "name": "rogueio",
+  "version": "0.0.0-b",
   "description": "A Light Rogue Javascript Game Engine",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "end:docker": "docker-compose down",
     "clean:docker": "docker system prune -f"
   },
-  "repository": "https://github.com/NodeGG/RogueJS.git",
+  "repository": "https://github.com/NodeGG/RogueIO.git",
   "author": "Warren Gates <warrenckhan@gmail.com>",
   "license": "MIT",
   "private": false,
