@@ -1,3 +1,4 @@
+import AssetManager from "./assetmanager";
 import Tile from "./tile";
 import Game from "./game";
 export default class Exit extends Tile {
@@ -7,6 +8,7 @@ export default class Exit extends Tile {
 
   stepOn(monster) {
     if (monster.isPlayer) {
+      AssetManager.playSound("newLevel");
       if (Game.level == Game.numLevels) {
         Game.addScore(Game.score, true);
         Game.showTitle();

@@ -1,19 +1,17 @@
 {
   "name": "roguejs",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A Light Rogue Javascript Game Engine",
   "main": "index.js",
   "scripts": {
-    "watch": "webpack --watch",
     "dev": "webpack-dev-server --open --watch",
     "build": "babel ./src -d lib",
     "build:docker": "docker-compose build",
     "dev:docker": "docker-compose up dev",
-    "start:docker": "docker-compose up web nginx -d",
     "end:docker": "docker-compose down",
     "clean:docker": "docker system prune -f"
   },
-  "repository": "https://github.com/NodeGG/RogueJs.git",
+  "repository": "https://github.com/NodeGG/RogueJS.git",
   "author": "Warren Gates <warrenckhan@gmail.com>",
   "license": "MIT",
   "private": false,

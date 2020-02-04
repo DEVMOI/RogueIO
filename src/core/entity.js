@@ -1,3 +1,4 @@
+import { initSounds, playSound } from "./assetmanager";
 import Game from "./game";
 import SpriteSheet from "./spritesheet";
 export default class Entity {
@@ -8,9 +9,21 @@ export default class Entity {
     this.sprite = sprite;
     this.hp = hp;
     this.teleportCounter = 2;
+    this.offsetX = 0;
+    this.offsetY = 0;
+    this.lastMove = [-1, 0];
+    this.bonusAttack = 0;
   }
   heal(damage) {
     this.hp = Math.min(Game.maxHp, this.hp + damage);
+  }
+  
+  getDisplayX() {
+    return this.tile.x + this.offsetX;
+  }
+
+  getDisplayY() {
+    return this.tile.y + this.offsetY;
   }
   draw() {
     this.ctx = Game.canvas.getCtx();
@@ -19,31 +32,44 @@ export default class Entity {
       tilesize: Game.tilesize
     });
     if (this.teleportCounter > 0) {
-      this.spritesheet.drawSprite(10, this.tile.x, this.tile.y);
+      this.spritesheet.drawSprite(10, this.getDisplayX(), this.getDisplayY());
     } else {
-      this.spritesheet.drawSprite(this.sprite, this.tile.x, this.tile.y);
+      this.spritesheet.drawSprite(
+        this.sprite,
+        this.getDisplayX(),
+        this.getDisplayY()
+      );
       this.drawHp();
     }
+    this.offsetX -= Math.sign(this.offsetX) * (1 / 8);
+    this.offsetY -= Math.sign(this.offsetY) * (1 / 8);
   }
   drawHp() {
     for (let i = 0; i < this.hp; i++) {
       this.spritesheet.drawSprite(
         9,
-        this.tile.x + (i % 3) * (5 / 16),
-        this.tile.y - Math.floor(i / 3) * (5 / 16)
+        this.getDisplayX() + (i % 3) * (5 / 16),
+        this.getDisplayY() - Math.floor(i / 3) * (5 / 16)
       );
     }
   }
   tryMove(dx, dy) {
     let newTile = this.tile.getNeighbor(dx, dy);
     if (newTile.passable) {
+      this.lastMove = [dx, dy];
       if (!newTile.monster) {
         this.move(newTile);
       } else {
         if (this.isPlayer != newTile.monster.isPlayer) {
           this.attackedThisTurn = true;
           newTile.monster.stunned = true;
-          newTile.monster.hit(1);
+          newTile.monster.hit(1 + this.bonusAttack);
+          this.bonusAttack = 0;
+
+          Game.shakeAmount = 5;
+
+          this.offsetX = (newTile.x - this.tile.x) / 2;
+          this.offsetY = (newTile.y - this.tile.y) / 2;
         }
       }
       return true;
@@ -72,9 +98,17 @@ export default class Entity {
     }
   }
   hit(damage) {
+    if (this.sheild > 0) {
+    }
     this.hp -= damage;
     if (this.hp <= 0) {
       this.die();
+    }
+
+    if (this.isPlayer) {
+      playSound("hit1");
+    } else {
+      playSound("hit2");
     }
   }
 
@@ -87,6 +121,8 @@ export default class Entity {
   move(tile) {
     if (this.tile) {
       this.tile.monster = null;
+      this.offsetX = this.tile.x - tile.x;
+      this.offsetY = this.tile.y - tile.y;
     }
     this.tile = tile;
     tile.monster = this;
