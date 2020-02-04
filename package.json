@@ -1,6 +1,6 @@
 {
   "name": "rogueio",
-  "version": "0.0.0",
+  "version": "0.0.0-a",
   "description": "A Light Rogue Javascript Game Engine",
   "main": "index.js",
   "scripts": {
