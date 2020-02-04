@@ -47,7 +47,7 @@ import { setStoreItem, getStoreItem } from "./core/store.js";
 import TileEngine from "./core/tileengine.js";
 import Vector from "./core/vector.js";
 
-let RogueJS = {
+let RogueIO = {
   Animation,
 
   imageAssets,
@@ -103,4 +103,4 @@ let RogueJS = {
   Vector
 };
 
-export default RogueJS;
+export default RogueIO;

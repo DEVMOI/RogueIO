@@ -1,6 +1,6 @@
 // import init from "./lib";
-import RogueJs from "../../src";
-let { Game, Entity, Floor } = RogueJs();
+import RogueIO from "../../src";
+let { Game, Entity, Floor } = RogueIO();
 
 export default class Ent extends Entity {
   constructor(tile) {

@@ -2,11 +2,11 @@ import Options from "./options";
 import { emit } from "./eventmanager";
 
 /**
- * Functions for initializing the RogueJS library and getting the canvas and context
+ * Functions for initializing the RogueIO library and getting the canvas and context
  * objects.
  *
  * ```js
- * import { getCanvas, getContext, init } from 'RogueJs';
+ * import { getCanvas, getContext, init } from 'RogueIO';
  *
  * let { canvas, context } = init();
  *
@@ -40,16 +40,16 @@ export function getContext() {
 }
 
 /**
- * Initialize the library and set up the canvas. Typically you will call `init()` as the first thing and give it the canvas to use. This will allow all RogueJs objects to reference the canvas when created.
+ * Initialize the library and set up the canvas. Typically you will call `init()` as the first thing and give it the canvas to use. This will allow all RogueIO objects to reference the canvas when created.
  *
  * ```js
- * import { init } from 'RogueJs';
+ * import { init } from 'RogueIO';
  *
  * let { canvas, context } = init('game');
  * ```
  * @function init
  *
- * @param {String|HTMLCanvasElement} [canvas] - The canvas for RogueJs to use. Can either be the ID of the canvas element or the canvas element itself. Defaults to using the first canvas element on the page.
+ * @param {String|HTMLCanvasElement} [canvas] - The canvas for RogueIO to use. Can either be the ID of the canvas element or the canvas element itself. Defaults to using the first canvas element on the page.
  *
  * @returns {Object} An object with properties `canvas` and `context`. `canvas` it the canvas element for the game and `context` is the context object the game draws to.
  */

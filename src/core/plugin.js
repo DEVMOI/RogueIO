@@ -2,7 +2,7 @@
  * A plugin system based on the [interceptor pattern](https://en.wikipedia.org/wiki/Interceptor_pattern), designed to share reusable code such as more advance collision detection or a 2D physics engine.
  *
  * ```js
- * import { registerPlugin, Sprite } from 'RogueJS';
+ * import { registerPlugin, Sprite } from 'RogueIO';
  * import loggingPlugin from 'path/to/plugin/code.js'
  *
  * // register a plugin that adds logging to all Sprites
@@ -16,7 +16,7 @@
  */
 
 /**
- * Get the RogueJS object method name from the plugin.
+ * Get the RogueIO object method name from the plugin.
  *
  * @param {String} methodName - Before/After function name
  *
@@ -41,14 +41,14 @@ function removeInterceptor(interceptors, fn) {
 }
 
 /**
- * Register a plugin to run a set of functions before or after the RogueJS object functions.
+ * Register a plugin to run a set of functions before or after the RogueIO object functions.
  * @function registerPlugin
  *
- * @param {Object} RogueJSObj - RogueJS object to attach the plugin to.
+ * @param {Object} RogueIOObj - RogueIO object to attach the plugin to.
  * @param {Object} pluginObj - Plugin object with before and after intercept functions.
  */
-export function registerPlugin(RogueJSObj, pluginObj) {
-  let objectProto = RogueJSObj.prototype;
+export function registerPlugin(RogueIOObj, pluginObj) {
+  let objectProto = RogueIOObj.prototype;
 
   if (!objectProto) return;
 
@@ -112,14 +112,14 @@ export function registerPlugin(RogueJSObj, pluginObj) {
 }
 
 /**
- * Unregister a plugin from a RogueJS object.
+ * Unregister a plugin from a RogueIO object.
  * @function unregisterPlugin
  *
- * @param {Object} RogueJSObj - RogueJS object to detach plugin from.
+ * @param {Object} RogueIOObj - RogueIO object to detach plugin from.
  * @param {Object} pluginObj - The plugin object that was passed during registration.
  */
-export function unregisterPlugin(RogueJSObj, pluginObj) {
-  let objectProto = RogueJSObj.prototype;
+export function unregisterPlugin(RogueIOObj, pluginObj) {
+  let objectProto = RogueIOObj.prototype;
 
   if (!objectProto || !objectProto._inc) return;
 
@@ -136,10 +136,10 @@ export function unregisterPlugin(RogueJSObj, pluginObj) {
 }
 
 /**
- * Safely extend the functionality of a RogueJS object. Any properties that already exist on the RogueJS object will not be added.
+ * Safely extend the functionality of a RogueIO object. Any properties that already exist on the RogueIO object will not be added.
  *
  * ```js
- * import { extendObject, Vector } from 'RogueJS';
+ * import { extendObject, Vector } from 'RogueIO';
  *
  * // add a subtract function to all Vectors
  * extendObject(Vector, {
@@ -150,11 +150,11 @@ export function unregisterPlugin(RogueJSObj, pluginObj) {
  * ```
  * @function extendObject
  *
- * @param {Object} RogueJSObj - RogueJS object to extend
+ * @param {Object} RogueIOObj - RogueIO object to extend
  * @param {Object} properties - Properties to add.
  */
-export function extendObject(RogueJSObj, properties) {
-  let objectProto = RogueJSObj.prototype;
+export function extendObject(RogueIOObj, properties) {
+  let objectProto = RogueIOObj.prototype;
 
   if (!objectProto) return;
 

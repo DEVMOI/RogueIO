@@ -1,6 +1,6 @@
 // import init from "./lib";
-import RogueJs from "../../src";
-let { Entity } = RogueJs();
+import RogueIO from "../../src";
+let { Entity } = RogueIO();
 
 export default class Blob extends Entity {
   constructor(tile) {

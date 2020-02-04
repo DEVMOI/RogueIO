@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: E:\GitHub\RogueJs\package.json: Unexpected string in JSON at position 616
+  SyntaxError: E:\GitHub\RogueIO\package.json: Unexpected string in JSON at position 616
       at JSON.parse (<anonymous>)
       at C:\Users\Warren\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
       at Generator.next (<anonymous>)
@@ -23,7 +23,7 @@ Trace:
 
 npm manifest: 
   {
-    "name": "roguejs",
+    "name": "RogueIO",
     "version": "0.0.0",
     "description": "A Light Rogue Javascript Game Engine",
     "main": "index.js",
@@ -35,7 +35,7 @@ npm manifest:
       "end:docker": "docker-compose down",
       "clean:docker": "docker system prune -f"
     },
-    "repository": "https://github.com/NodeGG/RogueJS.git",
+    "repository": "https://github.com/NodeGG/RogueIO.git",
     "author": "Warren Gates <warrenckhan@gmail.com>",
     "license": "MIT",
     "private": false,
