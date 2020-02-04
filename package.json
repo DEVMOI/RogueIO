@@ -1,5 +1,5 @@
 {
-  "name": "roguejs",
+  "name": "rogueio",
   "version": "0.0.0",
   "description": "A Light Rogue Javascript Game Engine",
   "main": "index.js",
@@ -15,7 +15,6 @@
   "author": "Warren Gates <warrenckhan@gmail.com>",
   "license": "MIT",
   "private": false,
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "core-js": "3",
