@@ -67,8 +67,10 @@ export function init(canvas) {
   // @endif
 
   context = canvasEl.getContext("2d");
-  context.font='15px sans-serif';
-  console.log(context.font)
+  context.font = "15px sans-serif";
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+  console.log(context.font);
   context.imageSmoothingEnabled = false;
 
   emit("init");
