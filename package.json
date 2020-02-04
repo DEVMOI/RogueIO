@@ -15,6 +15,7 @@
   "author": "Warren Gates <warrenckhan@gmail.com>",
   "license": "MIT",
   "private": false,
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "core-js": "3",
