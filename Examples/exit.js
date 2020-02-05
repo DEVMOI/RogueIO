@@ -1,6 +1,6 @@
-import AssetManager from "./assetmanager";
-import Tile from "./tile";
-import Game from "./game";
+import AssetManager from "../src/core/assetmanager";
+import Tile from "../src/core/tile";
+import Game from "../src/core/game";
 export default class Exit extends Tile {
   constructor(x, y) {
     super(x, y, 11, true);

@@ -1,6 +1,6 @@
-import { playSound } from "./assetmanager";
-import Game from "./game";
-import Tile from "./tile";
+import { playSound } from "../src/core/assetmanager";
+import Game from "../src/core/game";
+import Tile from "../src/core/tile";
 export default class Floor extends Tile {
   constructor(x, y) {
     super(x, y, 2, true);

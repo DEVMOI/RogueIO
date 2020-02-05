@@ -1,8 +1,8 @@
-import { playSound } from "./assetmanager";
-import Game from "./game";
-import Entity from "./entity";
-import Actions from "../../Examples/Actions/actions";
-import util from "./util";
+import { playSound } from "../src/core/assetmanager";
+import Game from "../src/core/game";
+import Entity from "../src/core/entity";
+import Actions from "./Actions/actions";
+import util from "../src/core/util";
 export default class Player extends Entity {
   constructor(tile) {
     super(tile, 0, 3);

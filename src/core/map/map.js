@@ -19,6 +19,7 @@ export default class Map {
       for (let j = 0; j < this._height; j++) {
         map[i].push(value);
       }
+      console.log(this._width, this._height)
     }
     return map;
   }
