@@ -20,6 +20,13 @@ import { emit } from "./eventmanager";
 let canvasEl, context;
 
 /**
+ * setCanvas and Context Options
+ */
+export function setOptions() {
+  canvasEl;
+}
+
+/**
  * Return the canvas element.
  * @function getCanvas
  *
